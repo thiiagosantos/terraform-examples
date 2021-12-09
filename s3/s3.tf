@@ -6,8 +6,10 @@ resource "aws_s3_bucket" "this" {
 }
 
 resource "aws_s3_bucket_object" "this" {
-  bucket = aws_s3_bucket.this.bucket
-  key    = "config/${local.ip_filepath}"
+  bucket       = aws_s3_bucket.this.bucket
+  key          = "config/${local.ip_filepath}"
+  content_type = "application/json"
+
   source = local.ip_filepath
   etag   = filemd5(local.ip_filepath)
 }
